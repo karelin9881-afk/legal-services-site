@@ -1,7 +1,8 @@
+import type { MetadataRoute } from "next";
 import { siteConfig } from "@/content/siteConfig";
 import { services } from "@/content/services";
 
-export default function sitemap() {
+export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.siteUrl.replace(/\/$/, "");
   return [
     {

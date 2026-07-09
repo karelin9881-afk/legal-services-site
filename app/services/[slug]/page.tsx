@@ -179,6 +179,39 @@ export default async function ServicePage({
         </div>
       </section>
 
+      <section className="border-b border-black/5 bg-white">
+        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-[0.85fr_1.15fr] lg:px-8">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+              Подготовка
+            </div>
+            <h2 className="mt-2 text-2xl font-semibold text-black">
+              Что желательно собрать заранее
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-black/70">
+              Полный пакет документов не обязателен для первой консультации, но эти материалы
+              помогают быстрее оценить перспективы и выбрать стратегию.
+            </p>
+
+            <div className="mt-6 rounded-2xl border border-brand/10 bg-brand/5 p-5">
+              <div className="text-sm font-semibold text-black">Итог для клиента</div>
+              <p className="mt-2 text-sm leading-relaxed text-black/70">{service.clientResult}</p>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-soft">
+            <ul className="space-y-3">
+              {service.documents.map((item) => (
+                <li key={item} className="flex gap-3 text-sm text-black/75">
+                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-brand" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section id="contacts" className="border-b border-black/5">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-2 md:items-start">

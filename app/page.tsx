@@ -160,6 +160,13 @@ export default function HomePage() {
                     ))}
                   </ul>
 
+                  <div className="mt-5 rounded-2xl bg-slate-50 p-4">
+                    <div className="text-xs font-semibold uppercase tracking-[0.16em] text-brand">
+                      Результат
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-black/70">{s.clientResult}</p>
+                  </div>
+
                   <div className="mt-auto pt-6">
                     <Link href={`/services/${s.slug}`}>
                       <Button size="sm">Подробнее</Button>
@@ -167,6 +174,37 @@ export default function HomePage() {
                   </div>
                 </div>
               </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-black/5 bg-white">
+        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-14 sm:px-6 md:grid-cols-[0.8fr_1.2fr] lg:px-8">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+              Что получает клиент
+            </div>
+            <h2 className="mt-2 text-2xl font-semibold text-black">
+              Не просто консультацию, а понятный план действий
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-black/70">
+              После разбора вы понимаете, какие документы нужны, какие риски есть
+              и какой порядок действий даст лучший шанс на результат.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ["Правовая оценка", "Проверяем факты, сроки, документы и слабые места позиции."],
+              ["Доказательства", "Формируем список документов и запросов, которые усиливают дело."],
+              ["Переговоры", "Готовим претензионную позицию без лишнего давления и ошибок."],
+              ["Судебная защита", "Выстраиваем аргументацию, требования и процессуальные шаги."],
+            ].map(([title, desc]) => (
+              <div key={title} className="rounded-2xl border border-black/10 bg-white p-5 shadow-[0_1px_0_rgba(0,0,0,0.03)]">
+                <div className="text-sm font-semibold text-black">{title}</div>
+                <div className="mt-2 text-sm leading-relaxed text-black/65">{desc}</div>
+              </div>
             ))}
           </div>
         </div>

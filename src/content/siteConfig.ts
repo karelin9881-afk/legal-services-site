@@ -1,7 +1,7 @@
 export const siteConfig = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sudebnayapomosh.ru",
   brand: {
-    name: "Юридические услуги",
+    name: "Судебная помощь",
   },
   contacts: {
     phoneDisplay: "+7 (495) 123-45-67",

@@ -9,6 +9,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -18,9 +19,19 @@ body {
   background:
     radial-gradient(circle at top right, rgba(11, 45, 92, 0.06), transparent 34rem),
     #ffffff;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
 }
 
 ::selection {
   background: rgba(11, 45, 92, 0.14);
+}
+
+p,
+li,
+a,
+button {
+  overflow-wrap: anywhere;
 }
 

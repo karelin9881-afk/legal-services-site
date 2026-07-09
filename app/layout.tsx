@@ -61,43 +61,6 @@ const structuredData = {
   ],
 };
 
-const cssRecoveryScript = `
-(() => {
-  const injected = new Set();
-
-  const recover = async () => {
-    const links = [...document.querySelectorAll('link[rel="stylesheet"]')]
-      .filter((link) => link.href.includes('/_next/static/css/'));
-
-    for (const link of links) {
-      if (injected.has(link.href)) continue;
-
-      try {
-        const res = await fetch(link.href, { cache: 'no-store' });
-        if (!res.ok) continue;
-        const css = await res.text();
-        if (!css.trim()) continue;
-
-        const style = document.createElement('style');
-        style.setAttribute('data-css-recovery', link.href);
-        style.textContent = css;
-        document.head.appendChild(style);
-        injected.add(link.href);
-      } catch {}
-    }
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', recover, { once: true });
-  } else {
-    recover();
-  }
-
-  window.addEventListener('load', recover, { once: true });
-  setTimeout(recover, 1500);
-})();
-`;
-
 export default function RootLayout({
   children,
 }: {
@@ -121,7 +84,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        <script dangerouslySetInnerHTML={{ __html: cssRecoveryScript }} />
       </body>
     </html>
   );

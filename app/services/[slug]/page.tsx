@@ -101,7 +101,7 @@ export default async function ServicePage({
   return (
     <div className="bg-white">
       <section className="relative overflow-hidden border-b border-black/5">
-        <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
           <Breadcrumbs
             items={[
               { label: "Главная", href: "/" },
@@ -122,12 +122,12 @@ export default async function ServicePage({
                 {service.shortDescription}
               </p>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Link href="#contacts" className="inline-flex">
-                  <Button size="md">Получить консультацию</Button>
+              <div className="mt-7 grid gap-3 sm:flex sm:flex-row">
+                <Link href="#contacts" className="inline-flex w-full sm:w-auto">
+                  <Button size="md" className="w-full sm:w-auto">Получить консультацию</Button>
                 </Link>
-                <a href={`tel:${siteConfig.contacts.phoneHref}`} className="inline-flex">
-                  <Button variant="outline" size="md">
+                <a href={`tel:${siteConfig.contacts.phoneHref}`} className="inline-flex w-full sm:w-auto">
+                  <Button variant="outline" size="md" className="w-full sm:w-auto">
                     Позвонить
                   </Button>
                 </a>
@@ -141,7 +141,7 @@ export default async function ServicePage({
             </div>
 
             <Card className="bg-white shadow-soft">
-              <div className="p-6">
+              <div className="p-5 sm:p-6">
                 <div className="text-sm font-semibold text-black">Что входит в услугу</div>
                 <ul className="mt-4 space-y-2">
                   {service.bullets.map((b) => (
@@ -180,7 +180,7 @@ export default async function ServicePage({
       </section>
 
       <section className="border-b border-black/5 bg-white">
-        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-[0.85fr_1.15fr] lg:px-8">
+        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:px-6 sm:py-12 md:grid-cols-[0.85fr_1.15fr] lg:px-8">
           <div>
             <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
               Подготовка
@@ -199,7 +199,7 @@ export default async function ServicePage({
             </div>
           </div>
 
-          <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-soft">
+          <div className="rounded-2xl border border-black/10 bg-white p-5 shadow-soft sm:p-6">
             <ul className="space-y-3">
               {service.documents.map((item) => (
                 <li key={item} className="flex gap-3 text-sm text-black/75">
@@ -213,7 +213,7 @@ export default async function ServicePage({
       </section>
 
       <section id="contacts" className="border-b border-black/5">
-        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
           <div className="grid gap-8 md:grid-cols-2 md:items-start">
             <div>
               <h2 className="text-2xl font-semibold text-black">Заявка на консультацию</h2>
@@ -221,7 +221,7 @@ export default async function ServicePage({
                 Опишите ситуацию. Мы вернемся с рекомендациями и списком документов.
               </p>
 
-              <div className="mt-6 space-y-3 rounded-2xl border border-black/10 bg-white p-6">
+              <div className="mt-6 space-y-3 rounded-2xl border border-black/10 bg-white p-5 sm:p-6">
                 <div className="text-sm text-black/70">Телефон</div>
                 <a
                   className="block text-base font-semibold text-black"
@@ -242,7 +242,7 @@ export default async function ServicePage({
             </div>
 
             <Card>
-              <div className="p-6">
+              <div className="p-5 sm:p-6">
                 <div className="text-sm font-semibold text-black">Кратко о задаче</div>
                 <div className="mt-1 text-sm text-black/65">
                   Автоподстановка темы: <span className="font-semibold">{service.title}</span>
@@ -256,8 +256,8 @@ export default async function ServicePage({
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="rounded-2xl border border-black/10 bg-white p-6">
+      <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+        <div className="rounded-2xl border border-black/10 bg-white p-5 sm:p-6">
           <div className="text-sm font-semibold text-black">FAQ по услуге</div>
           <div className="mt-2 text-sm text-black/70">
             Коротко отвечаем на самые частые вопросы про <span className="font-semibold">{service.title}</span>.

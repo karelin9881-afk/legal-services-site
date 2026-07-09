@@ -14,9 +14,9 @@ const navItems = [
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-black/5 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3">
-          <Link href="/" className="text-sm font-semibold tracking-wide text-black">
+          <Link href="/" className="text-sm font-semibold tracking-wide text-black sm:text-base">
             {siteConfig.brand.name}
           </Link>
           <span className="hidden h-6 w-px bg-black/10 sm:block" />
@@ -37,17 +37,31 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <a href={`tel:${siteConfig.contacts.phoneHref}`} className="hidden md:inline">
             <Button variant="outline" size="sm">
               Позвонить
             </Button>
           </a>
           <Link href="#contacts" className="inline">
-            <Button size="sm">Получить консультацию</Button>
+            <Button size="sm" className="px-3 sm:px-4">
+              <span className="sm:hidden">Консультация</span>
+              <span className="hidden sm:inline">Получить консультацию</span>
+            </Button>
           </Link>
         </div>
       </div>
+      <nav className="mx-auto flex w-full max-w-6xl gap-2 overflow-x-auto px-4 pb-3 sm:px-6 md:hidden">
+        {navItems.map((it) => (
+          <a
+            key={it.href}
+            href={it.href}
+            className="shrink-0 rounded-full border border-black/10 bg-white px-3 py-1.5 text-xs text-black/75"
+          >
+            {it.label}
+          </a>
+        ))}
+      </nav>
     </header>
   );
 }

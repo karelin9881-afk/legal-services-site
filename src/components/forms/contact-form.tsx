@@ -75,8 +75,8 @@ export function ContactForm({
         />
       </div>
 
-      <div className="flex items-center gap-3">
-        <Button type="submit" disabled={status === "loading"}>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <Button type="submit" disabled={status === "loading"} className="w-full sm:w-auto">
           {status === "loading" ? "Отправляем..." : status === "success" ? "Заявка отправлена" : "Отправить заявку"}
         </Button>
         {status === "error" && (

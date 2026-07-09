@@ -5,15 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build --webpack --debug",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "framer-motion": "latest",
-    "next": "latest",
+    "next": "15",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "typescript": "7.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "latest",
@@ -22,7 +23,6 @@
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
     "postcss": "latest",
-    "tailwindcss": "latest",
-    "typescript": "7.0.2"
+    "tailwindcss": "latest"
   }
 }

@@ -26,7 +26,7 @@ export default function HomePage() {
     <div className="bg-white">
       {/* 1. Hero */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto w-full max-w-6xl px-4 pb-14 pt-10 sm:px-6 lg:px-8 lg:pb-20 lg:pt-14">
+        <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 pb-14 pt-10 sm:px-6 lg:grid-cols-[1.05fr_0.75fr] lg:px-8 lg:pb-20 lg:pt-16">
           <div className="max-w-3xl">
             <div className="inline-flex items-center rounded-full border border-black/10 bg-white px-4 py-2 text-xs text-black/70">
               Юридическая поддержка в жилищных спорах
@@ -51,6 +51,32 @@ export default function HomePage() {
 
             <div className="mt-8 text-sm text-black/60">
               Мы ответим быстро и по делу. Без скрытых условий.
+            </div>
+          </div>
+
+          <div className="relative rounded-[2rem] border border-black/10 bg-white p-6 shadow-soft lg:p-8">
+            <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-brand/40 to-transparent" />
+            <div className="text-sm font-semibold uppercase tracking-[0.18em] text-brand">
+              Практика
+            </div>
+            <div className="mt-4 text-2xl font-semibold leading-tight text-black">
+              Жилищные споры, ЖКХ, взыскание ущерба
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-black/68">
+              Берём на себя правовую позицию, документы, переговоры и представительство.
+              Вы понимаете риски, сроки и следующий шаг.
+            </p>
+
+            <div className="mt-8 grid gap-3">
+              {["Первичный разбор документов", "Досудебная позиция", "Представительство в суде"].map((item) => (
+                <div key={item} className="rounded-2xl bg-brand/5 px-4 py-3 text-sm text-black/78">
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 border-t border-black/10 pt-5 text-sm text-black/60">
+              Конфиденциально. По договору. Без навязанных услуг.
             </div>
           </div>
 

@@ -63,19 +63,14 @@ const structuredData = {
 
 const cssRecoveryScript = `
 (() => {
+  const injected = new Set();
+
   const recover = async () => {
     const links = [...document.querySelectorAll('link[rel="stylesheet"]')]
       .filter((link) => link.href.includes('/_next/static/css/'));
 
     for (const link of links) {
-      let empty = false;
-      try {
-        empty = !link.sheet || link.sheet.cssRules.length === 0;
-      } catch {
-        empty = false;
-      }
-
-      if (!empty) continue;
+      if (injected.has(link.href)) continue;
 
       try {
         const res = await fetch(link.href, { cache: 'no-store' });
@@ -87,6 +82,7 @@ const cssRecoveryScript = `
         style.setAttribute('data-css-recovery', link.href);
         style.textContent = css;
         document.head.appendChild(style);
+        injected.add(link.href);
       } catch {}
     }
   };
@@ -96,6 +92,9 @@ const cssRecoveryScript = `
   } else {
     recover();
   }
+
+  window.addEventListener('load', recover, { once: true });
+  setTimeout(recover, 1500);
 })();
 `;
 

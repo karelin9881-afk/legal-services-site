@@ -1,5 +1,5 @@
 export const siteConfig = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sudebnayapomosh.ru",
   brand: {
     name: "Юридические услуги",
   },

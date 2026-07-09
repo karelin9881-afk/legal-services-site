@@ -100,7 +100,7 @@ export default async function ServicePage({
 
   return (
     <div className="bg-white">
-      <section className="border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-black/5">
         <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
           <Breadcrumbs
             items={[
@@ -112,6 +112,9 @@ export default async function ServicePage({
 
           <div className="mt-6 grid gap-8 md:grid-cols-2 md:items-start">
             <div>
+              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+                Услуга
+              </div>
               <h1 className="text-3xl font-semibold leading-tight tracking-tight text-black sm:text-4xl">
                 {service.title}
               </h1>
@@ -130,14 +133,14 @@ export default async function ServicePage({
                 </a>
               </div>
 
-              <div className="mt-6 text-xs text-black/55">
+              <div className="mt-6 rounded-2xl border border-brand/10 bg-brand/5 p-4 text-sm text-black/70">
                 {slug === "zaliv-zhilyh-pomeshcheniy-v-mkd"
                   ? "Подходит, если нужна правовая позиция по факту залива: доказательства, виновник, ущерб, штрафы/неустойка."
                   : "Подходит, если вам начислили задолженность за ЖКУ и нужно проверить расчеты, оспорить основания и защититься в суде."}
               </div>
             </div>
 
-            <Card className="bg-white">
+            <Card className="bg-white shadow-soft">
               <div className="p-6">
                 <div className="text-sm font-semibold text-black">Что входит в услугу</div>
                 <ul className="mt-4 space-y-2">
@@ -158,6 +161,21 @@ export default async function ServicePage({
               </div>
             </Card>
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-black/5 bg-slate-50/50">
+        <div className="mx-auto grid w-full max-w-6xl gap-4 px-4 py-8 sm:grid-cols-3 sm:px-6 lg:px-8">
+          {[
+            ["Оценка позиции", "Проверяем документы, сроки и доказательства."],
+            ["План действий", "Объясняем риски и выбираем рабочий сценарий."],
+            ["Сопровождение", "Готовим документы и ведем коммуникацию."],
+          ].map(([title, desc]) => (
+            <div key={title} className="rounded-2xl border border-black/10 bg-white p-5">
+              <div className="text-sm font-semibold text-black">{title}</div>
+              <div className="mt-2 text-sm text-black/65">{desc}</div>
+            </div>
+          ))}
         </div>
       </section>
 

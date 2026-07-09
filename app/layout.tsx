@@ -39,6 +39,21 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  name: siteConfig.brand.name,
+  url: siteConfig.siteUrl,
+  areaServed: "Россия",
+  serviceType: [
+    "Жилищные споры",
+    "Залив жилых помещений",
+    "Споры по долгам за ЖКУ",
+    "Досудебное урегулирование",
+    "Представительство в суде",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -58,6 +73,10 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </body>
     </html>
   );

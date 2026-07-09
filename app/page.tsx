@@ -25,10 +25,10 @@ export default function HomePage() {
   return (
     <div className="bg-white">
       {/* 1. Hero */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden border-b border-black/5">
         <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 pb-14 pt-10 sm:px-6 lg:grid-cols-[1.05fr_0.75fr] lg:px-8 lg:pb-20 lg:pt-16">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center rounded-full border border-black/10 bg-white px-4 py-2 text-xs text-black/70">
+            <div className="inline-flex items-center rounded-full border border-brand/15 bg-brand/5 px-4 py-2 text-xs font-medium text-brand">
               Юридическая поддержка в жилищных спорах
             </div>
             <h1 className="mt-5 text-4xl font-semibold leading-tight tracking-tight text-black sm:text-5xl">
@@ -49,7 +49,12 @@ export default function HomePage() {
               </a>
             </div>
 
-            <div className="mt-8 text-sm text-black/60">
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-black/60">
+              <span>Конфиденциально</span>
+              <span>По договору</span>
+              <span>Без навязанных услуг</span>
+            </div>
+            <div className="mt-3 text-sm text-black/60">
               Мы ответим быстро и по делу. Без скрытых условий.
             </div>
           </div>
@@ -62,14 +67,14 @@ export default function HomePage() {
             <div className="mt-4 text-2xl font-semibold leading-tight text-black">
               Жилищные споры, ЖКХ, взыскание ущерба
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-black/68">
+            <p className="mt-4 text-sm leading-relaxed text-black/70">
               Берём на себя правовую позицию, документы, переговоры и представительство.
               Вы понимаете риски, сроки и следующий шаг.
             </p>
 
             <div className="mt-8 grid gap-3">
               {["Первичный разбор документов", "Досудебная позиция", "Представительство в суде"].map((item) => (
-                <div key={item} className="rounded-2xl bg-brand/5 px-4 py-3 text-sm text-black/78">
+                <div key={item} className="rounded-2xl bg-brand/5 px-4 py-3 text-sm text-black/80">
                   {item}
                 </div>
               ))}
@@ -85,11 +90,27 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section aria-label="Ключевые преимущества" className="border-b border-black/5 bg-white">
+        <div className="mx-auto grid w-full max-w-6xl gap-3 px-4 py-5 sm:grid-cols-3 sm:px-6 lg:px-8">
+          {[
+            ["Документы", "Проверяем доказательства до подачи позиции"],
+            ["Переговоры", "Снижаем риск лишних судебных расходов"],
+            ["Суд", "Ведём дело до решения и исполнения"],
+          ].map(([title, desc]) => (
+            <div key={title} className="rounded-2xl border border-black/10 bg-white px-5 py-4">
+              <div className="text-sm font-semibold text-black">{title}</div>
+              <div className="mt-1 text-sm text-black/60">{desc}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* 2. О юристе */}
-      <section id="about" className="border-t border-black/5">
-        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <section id="about" className="border-b border-black/5">
+        <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="grid gap-10 md:grid-cols-2 md:items-start">
             <div>
+              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">О подходе</div>
               <h2 className="text-2xl font-semibold text-black">{siteConfig.about.title}</h2>
               <p className="mt-3 text-sm text-black/70">
                 Консультация проходит структурно: разбор фактов, документов, рисков и вариантов решения.
@@ -108,10 +129,11 @@ export default function HomePage() {
       </section>
 
       {/* 3. Услуги */}
-      <section id="services" className="border-t border-black/5">
-        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <section id="services" className="border-b border-black/5 bg-slate-50/50">
+        <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
+              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Практика</div>
               <h2 className="text-2xl font-semibold text-black">Услуги</h2>
               <p className="mt-2 text-sm text-black/70">
                 Каждая услуга открывается отдельной страницей и может быть расширена по мере подготовки материалов.
@@ -120,9 +142,12 @@ export default function HomePage() {
           </div>
 
           <div className="mt-8 grid gap-5 md:grid-cols-2">
-            {services.map((s) => (
-              <Card key={s.slug} className="transition-shadow hover:shadow-soft">
+            {services.map((s, idx) => (
+              <Card key={s.slug} className="transition-shadow hover:-translate-y-0.5 hover:shadow-soft">
                 <div className="flex h-full flex-col p-6">
+                  <div className="mb-5 h-10 w-10 rounded-2xl bg-brand text-center text-sm font-semibold leading-10 text-white">
+                    {idx + 1}
+                  </div>
                   <h3 className="text-lg font-semibold text-black">{s.title}</h3>
                   <p className="mt-2 text-sm text-black/70">{s.shortDescription}</p>
 
@@ -148,8 +173,9 @@ export default function HomePage() {
       </section>
 
       {/* 4. Почему выбирают нас */}
-      <section id="why" className="border-t border-black/5 bg-white">
-        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <section id="why" className="border-b border-black/5 bg-white">
+        <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Доверие</div>
           <h2 className="text-2xl font-semibold text-black">{siteConfig.why.title}</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-4">
             {siteConfig.why.items.map((item) => (
@@ -165,8 +191,9 @@ export default function HomePage() {
       </section>
 
       {/* 5. Этапы работы */}
-      <section id="steps" className="border-t border-black/5">
-        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <section id="steps" className="border-b border-black/5 bg-slate-50/50">
+        <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Процесс</div>
           <h2 className="text-2xl font-semibold text-black">{siteConfig.steps.title}</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-4">
             {siteConfig.steps.items.map((it, idx) => (
@@ -186,10 +213,11 @@ export default function HomePage() {
       </section>
 
       {/* 6. Частые вопросы */}
-      <section id="faq" className="border-t border-black/5 bg-white">
-        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <section id="faq" className="border-b border-black/5 bg-white">
+        <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between gap-4">
             <div>
+              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Вопросы</div>
               <h2 className="text-2xl font-semibold text-black">{siteConfig.faq.title}</h2>
               <p className="mt-2 text-sm text-black/70">
                 Отвечаем на вопросы заранее, чтобы вы принимали решения увереннее.
@@ -214,8 +242,8 @@ export default function HomePage() {
       </section>
 
       {/* 7. Контакты + 8. Форма */}
-      <section id="contacts" className="border-t border-black/5">
-        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <section id="contacts">
+        <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="grid gap-10 md:grid-cols-2 md:items-start">
             <div>
               <h2 className="text-2xl font-semibold text-black">Контакты</h2>

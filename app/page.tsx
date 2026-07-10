@@ -109,6 +109,39 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-b border-black/5 bg-white">
+        <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+          <div className="rounded-[2rem] border border-black/10 bg-slate-50 p-6 sm:p-8">
+            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+              Сильная позиция
+            </div>
+            <h2 className="mt-3 text-2xl font-semibold leading-tight text-black">
+              Сайт не обещает чудес. Он показывает порядок, стратегию и контроль
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-black/70">
+              В юридических спорах выигрывает не громкая реклама, а документы,
+              факты, сроки и аккуратная процессуальная работа. Именно это вынесено
+              в структуру каждой услуги.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ["01", "Фиксация", "Собираем основу: акты, фото, расчёты, переписку."],
+              ["02", "Позиция", "Определяем требования, риски и слабые места другой стороны."],
+              ["03", "Давление фактами", "Сначала претензия и переговоры, затем суд при необходимости."],
+              ["04", "Контроль", "Следим за сроками, документами и стадией исполнения."],
+            ].map(([num, title, desc]) => (
+              <div key={title} className="rounded-2xl border border-black/10 bg-white p-5 shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
+                <div className="text-xs font-semibold text-brand">{num}</div>
+                <div className="mt-2 text-sm font-semibold text-black">{title}</div>
+                <div className="mt-2 text-sm leading-relaxed text-black/65">{desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 2. О юристе */}
       <section id="about" className="border-b border-black/5">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
@@ -147,9 +180,10 @@ export default function HomePage() {
 
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {services.map((s, idx) => (
-              <Card key={s.slug} className="border-brand/10 transition hover:-translate-y-0.5 hover:shadow-soft">
+              <Card key={s.slug} className="group overflow-hidden border-brand/10 transition hover:-translate-y-0.5 hover:shadow-soft">
+                <div className="h-1 bg-gradient-to-r from-brand via-brand/60 to-transparent" />
                 <div className="flex h-full flex-col p-5 sm:p-6">
-                  <div className="mb-5 h-10 w-10 rounded-2xl bg-brand text-center text-sm font-semibold leading-10 text-white shadow-[0_10px_20px_rgba(11,45,92,0.18)]">
+                  <div className="mb-5 h-10 w-10 rounded-2xl bg-brand text-center text-sm font-semibold leading-10 text-white shadow-[0_10px_20px_rgba(11,45,92,0.18)] transition group-hover:scale-105">
                     {idx + 1}
                   </div>
                   <h3 className="text-lg font-semibold text-black">{s.title}</h3>
@@ -214,10 +248,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-black/5 bg-slate-950 text-white">
+      <section className="dark-luxury border-b border-black/5 text-white">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-14 sm:px-6 md:grid-cols-[0.85fr_1.15fr] lg:px-8">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/55">
+            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
               Ситуации
             </div>
             <h2 className="mt-2 text-2xl font-semibold leading-tight">
@@ -236,11 +270,42 @@ export default function HomePage() {
               ["Перед судом", "Готовим позицию, требования, доказательства и процессуальные документы."],
               ["На стадии взыскания", "Сопровождаем исполнительное производство и контролируем действия сторон."],
             ].map(([title, desc]) => (
-              <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
+              <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.07] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.18)]">
                 <div className="text-sm font-semibold">{title}</div>
                 <div className="mt-2 text-sm leading-relaxed text-white/60">{desc}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-black/5 bg-white">
+        <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="overflow-hidden rounded-[2rem] border border-brand/15 bg-brand text-white shadow-soft">
+            <div className="grid gap-8 p-6 sm:p-8 md:grid-cols-[1fr_0.8fr] md:items-center">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+                  Быстрый старт
+                </div>
+                <h2 className="mt-3 text-2xl font-semibold leading-tight">
+                  Не ждите, пока спор станет дороже
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-white/70">
+                  Чем раньше проверены документы и зафиксированы доказательства,
+                  тем проще сохранить деньги, сроки и сильную переговорную позицию.
+                </p>
+              </div>
+              <div className="rounded-2xl bg-white p-5 text-black">
+                <div className="text-sm font-semibold">Первый шаг</div>
+                <p className="mt-2 text-sm leading-relaxed text-black/65">
+                  Опишите ситуацию в форме. Мы разберём вводные и подскажем,
+                  какие документы нужны для предметной оценки.
+                </p>
+                <Link href="#contacts" className="mt-5 inline-flex w-full">
+                  <Button className="w-full">Получить консультацию</Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

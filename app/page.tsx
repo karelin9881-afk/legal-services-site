@@ -61,30 +61,31 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-2xl border border-brand/15 bg-white p-5 shadow-soft sm:rounded-[2rem] sm:p-6 lg:p-8">
-            <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent" />
-            <div className="pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-brand/10 blur-2xl" />
-            <div className="text-sm font-semibold uppercase tracking-[0.18em] text-brand">
-              Практика
-            </div>
-            <div className="mt-4 text-2xl font-semibold leading-tight text-black">
-              Жилищные споры, ЖКХ, взыскание ущерба
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-black/70">
-              Берём на себя правовую позицию, документы, переговоры и представительство.
-              Вы понимаете риски, сроки и следующий шаг.
-            </p>
+          <div className="relative min-h-[430px] overflow-hidden rounded-2xl border border-brand/15 bg-white shadow-soft sm:rounded-[2rem]">
+            <div className="legal-hero-art absolute inset-0" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white/85" />
 
-            <div className="mt-8 grid gap-3">
-              {["Первичный разбор документов", "Досудебная позиция", "Представительство в суде"].map((item) => (
-                <div key={item} className="rounded-2xl border border-black/5 bg-slate-50 px-4 py-3 text-sm text-black/80">
-                  {item}
-                </div>
-              ))}
+            <div className="absolute left-5 right-5 top-5 rounded-2xl border border-white/70 bg-white/85 p-4 shadow-soft backdrop-blur sm:left-6 sm:right-auto sm:w-72">
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
+                Практика
+              </div>
+              <div className="mt-2 text-lg font-semibold leading-tight text-black">
+                Жилищные споры, ЖКХ, взыскание ущерба
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-black/65">
+                Документы, переговоры и представительство в суде.
+              </p>
             </div>
 
-            <div className="mt-8 border-t border-black/10 pt-5 text-sm text-black/60">
-              Конфиденциально. По договору. Без навязанных услуг.
+            <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-black/10 bg-white p-5 shadow-soft">
+              <div className="text-sm font-semibold text-black">После консультации вы получите</div>
+              <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                {["оценку рисков", "список документов", "план действий"].map((item) => (
+                  <div key={item} className="rounded-xl bg-brand/5 px-3 py-2 text-sm text-black/75">
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -207,6 +208,37 @@ export default function HomePage() {
               <div key={title} className="rounded-2xl border border-black/10 bg-white p-5 shadow-[0_1px_0_rgba(0,0,0,0.03)]">
                 <div className="text-sm font-semibold text-black">{title}</div>
                 <div className="mt-2 text-sm leading-relaxed text-black/65">{desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-black/5 bg-slate-950 text-white">
+        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-14 sm:px-6 md:grid-cols-[0.85fr_1.15fr] lg:px-8">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/55">
+              Ситуации
+            </div>
+            <h2 className="mt-2 text-2xl font-semibold leading-tight">
+              Когда лучше обратиться до суда, а не после ошибки
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-white/65">
+              Чем раньше собраны доказательства и сформирована позиция, тем меньше риск
+              потерять сроки, деньги и сильные аргументы.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ["После залива", "Нужно зафиксировать повреждения, причину и виновника до спора о сумме."],
+              ["При спорной задолженности", "Важно проверить период, расчет, основания начисления и сроки."],
+              ["Перед судом", "Готовим позицию, требования, доказательства и процессуальные документы."],
+              ["На стадии взыскания", "Сопровождаем исполнительное производство и контролируем действия сторон."],
+            ].map(([title, desc]) => (
+              <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
+                <div className="text-sm font-semibold">{title}</div>
+                <div className="mt-2 text-sm leading-relaxed text-white/60">{desc}</div>
               </div>
             ))}
           </div>

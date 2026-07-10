@@ -48,3 +48,9 @@ button {
   background-size: 44px 44px;
 }
 
+.legal-hero-art {
+  background-image: url("/legal-hero.svg");
+  background-position: center;
+  background-size: cover;
+}
+

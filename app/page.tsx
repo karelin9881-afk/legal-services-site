@@ -25,10 +25,10 @@ export default function HomePage() {
   return (
     <div className="bg-white">
       {/* 1. Hero */}
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="luxury-surface fine-grid relative overflow-hidden border-b border-black/5">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 pb-12 pt-8 sm:px-6 lg:grid-cols-[1.05fr_0.75fr] lg:px-8 lg:pb-20 lg:pt-16">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center rounded-full border border-brand/15 bg-brand/5 px-4 py-2 text-xs font-medium text-brand">
+            <div className="inline-flex items-center rounded-full border border-brand/15 bg-white/80 px-4 py-2 text-xs font-medium text-brand shadow-[0_1px_0_rgba(11,45,92,0.08)]">
               Юридическая поддержка в жилищных спорах
             </div>
             <h1 className="mt-5 text-3xl font-semibold leading-tight tracking-tight text-black sm:text-5xl">
@@ -49,18 +49,21 @@ export default function HomePage() {
               </a>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-black/60">
-              <span>Конфиденциально</span>
-              <span>По договору</span>
-              <span>Без навязанных услуг</span>
+            <div className="mt-8 grid gap-2 text-sm text-black/65 sm:grid-cols-3">
+              {["Конфиденциально", "По договору", "Без навязанных услуг"].map((item) => (
+                <div key={item} className="rounded-2xl border border-black/10 bg-white/80 px-4 py-3">
+                  {item}
+                </div>
+              ))}
             </div>
             <div className="mt-3 text-sm text-black/60">
               Мы ответим быстро и по делу. Без скрытых условий.
             </div>
           </div>
 
-          <div className="relative rounded-2xl border border-black/10 bg-white p-5 shadow-soft sm:rounded-[2rem] sm:p-6 lg:p-8">
-            <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-brand/40 to-transparent" />
+          <div className="relative overflow-hidden rounded-2xl border border-brand/15 bg-white p-5 shadow-soft sm:rounded-[2rem] sm:p-6 lg:p-8">
+            <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-brand/60 to-transparent" />
+            <div className="pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full bg-brand/10 blur-2xl" />
             <div className="text-sm font-semibold uppercase tracking-[0.18em] text-brand">
               Практика
             </div>
@@ -74,7 +77,7 @@ export default function HomePage() {
 
             <div className="mt-8 grid gap-3">
               {["Первичный разбор документов", "Досудебная позиция", "Представительство в суде"].map((item) => (
-                <div key={item} className="rounded-2xl bg-brand/5 px-4 py-3 text-sm text-black/80">
+                <div key={item} className="rounded-2xl border border-black/5 bg-slate-50 px-4 py-3 text-sm text-black/80">
                   {item}
                 </div>
               ))}
@@ -97,7 +100,7 @@ export default function HomePage() {
             ["Переговоры", "Снижаем риск лишних судебных расходов"],
             ["Суд", "Ведём дело до решения и исполнения"],
           ].map(([title, desc]) => (
-            <div key={title} className="rounded-2xl border border-black/10 bg-white px-5 py-4">
+            <div key={title} className="rounded-2xl border border-black/10 bg-white px-5 py-4 shadow-[0_10px_24px_rgba(15,23,42,0.04)]">
               <div className="text-sm font-semibold text-black">{title}</div>
               <div className="mt-1 text-sm text-black/60">{desc}</div>
             </div>
@@ -129,7 +132,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. Услуги */}
-      <section id="services" className="border-b border-black/5 bg-slate-50/50">
+      <section id="services" className="fine-grid border-b border-black/5 bg-slate-50/70">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -143,9 +146,9 @@ export default function HomePage() {
 
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {services.map((s, idx) => (
-              <Card key={s.slug} className="transition-shadow hover:-translate-y-0.5 hover:shadow-soft">
+              <Card key={s.slug} className="border-brand/10 transition hover:-translate-y-0.5 hover:shadow-soft">
                 <div className="flex h-full flex-col p-5 sm:p-6">
-                  <div className="mb-5 h-10 w-10 rounded-2xl bg-brand text-center text-sm font-semibold leading-10 text-white">
+                  <div className="mb-5 h-10 w-10 rounded-2xl bg-brand text-center text-sm font-semibold leading-10 text-white shadow-[0_10px_20px_rgba(11,45,92,0.18)]">
                     {idx + 1}
                   </div>
                   <h3 className="text-lg font-semibold text-black">{s.title}</h3>
@@ -280,7 +283,7 @@ export default function HomePage() {
       </section>
 
       {/* 7. Контакты + 8. Форма */}
-      <section id="contacts">
+      <section id="contacts" className="luxury-surface">
         <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
           <div className="grid gap-10 md:grid-cols-2 md:items-start">
             <div>

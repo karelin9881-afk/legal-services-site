@@ -13,7 +13,7 @@ const navItems = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-black/5 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-black/5 bg-white/90 shadow-[0_1px_0_rgba(15,23,42,0.03)] backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3">
           <Link href="/" className="text-sm font-semibold tracking-wide text-black sm:text-base">

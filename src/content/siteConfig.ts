@@ -1,13 +1,28 @@
+function publicEnv(name: string, fallback: string) {
+  const value = process.env[name]?.trim();
+
+  if (!value || /^(undefined|null)$/i.test(value)) {
+    return fallback;
+  }
+
+  return value;
+}
+
+// TODO перед публикацией: владелец обязан указать реальные телефон, email, адрес и сведения об операторе.
 export const siteConfig = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  owner: {
+    name: publicEnv("NEXT_PUBLIC_SITE_OWNER_NAME", "[УКАЖИТЕ ФИО ОПЕРАТОРА]"),
+    address: publicEnv("NEXT_PUBLIC_SITE_OWNER_ADDRESS", "[УКАЖИТЕ АДРЕС ОПЕРАТОРА]"),
+  },
   brand: {
-    name: "Юридические услуги",
+    name: publicEnv("NEXT_PUBLIC_SITE_BRAND_NAME", "Юридические услуги"),
   },
   contacts: {
-    phoneDisplay: "+7 (495) 123-45-67",
-    phoneHref: "+74951234567",
-    email: "info@legal-services.ru",
-    address: "Москва, офис по предварительной записи",
+    phoneDisplay: publicEnv("NEXT_PUBLIC_CONTACT_PHONE_DISPLAY", "+7 (000) 000-00-00"),
+    phoneHref: publicEnv("NEXT_PUBLIC_CONTACT_PHONE_HREF", "+70000000000"),
+    email: publicEnv("NEXT_PUBLIC_CONTACT_EMAIL", "owner@example.com"),
+    address: publicEnv("NEXT_PUBLIC_CONTACT_ADDRESS", "[УКАЖИТЕ АДРЕС ДЛЯ КОНТАКТОВ]"),
   },
   hero: {
     title: "Юридическая помощь по жилищным спорам",
@@ -24,7 +39,28 @@ export const siteConfig = {
   },
   why: {
     title: "Почему выбирают нас",
-    items: ["Индивидуальный подход", "Большой опыт", "Честность", "Работа на результат"],
+    items: [
+      {
+        title: "Индивидуальный подход",
+        description:
+          "Разбираем вашу ситуацию по фактам и документам, подбираем стратегию под цель.",
+      },
+      {
+        title: "Честный план",
+        description:
+          "Работаем с понятными целями и честным оцениванием рисков и сроков.",
+      },
+      {
+        title: "Честность",
+        description:
+          "Без обещаний «гарантированного результата»: объясняем риски и варианты.",
+      },
+      {
+        title: "Работа на результат",
+        description:
+          "Фиксируем план, готовим документы и ведем дело до итогового результата.",
+      },
+    ],
   },
   steps: {
     title: "Этапы работы",

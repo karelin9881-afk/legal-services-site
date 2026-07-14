@@ -1,53 +1,151 @@
+"use client";
+
 import Link from "next/link";
+import { Button } from "@/components/Button/Button";
+import { ConsultationIcon, PhoneIcon } from "@/components/ButtonIcon/ButtonIcon";
 import { siteConfig } from "@/content/siteConfig";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import * as React from "react";
 
 const navItems = [
-  { href: "#about", label: "О юристе" },
-  { href: "#services", label: "Услуги" },
-  { href: "#why", label: "Почему выбирают нас" },
-  { href: "#steps", label: "Этапы работы" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contacts", label: "Контакты" },
+  { href: "/#about", label: "О юристе" },
+  { href: "/#services", label: "Услуги" },
+  { href: "/#why", label: "Преимущества" },
+  { href: "/#steps", label: "Этапы" },
+  { href: "/#faq", label: "FAQ" },
+  { href: "/#contacts", label: "Контакты" },
 ];
 
 export function Header() {
-  return (
-    <header className="sticky top-0 z-40 border-b border-black/5 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="text-sm font-semibold tracking-wide text-black">
-            {siteConfig.brand.name}
-          </Link>
-          <span className="hidden h-6 w-px bg-black/10 sm:block" />
-          <div className="hidden text-xs text-black/70 sm:block">
-            Минимум воды. Максимум результата.
-          </div>
-        </div>
+  const [isOpen, setIsOpen] = React.useState(false);
 
-        <nav className="hidden flex-wrap items-center gap-x-4 gap-y-2 md:flex">
+  React.useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isOpen]);
+
+  return (
+    <header className="legal-header">
+      <div className="legal-header__inner">
+        <Link
+          href="/"
+          className="legal-header__logo"
+          aria-label="На главную"
+          onClick={() => setIsOpen(false)}
+        >
+          <span className="legal-header__mark" aria-hidden="true">
+            Ю
+          </span>
+          <span className="legal-header__brand">
+            <span className="legal-header__name">{siteConfig.brand.name}</span>
+            <span className="legal-header__tagline">Жилищные споры и ЖКХ</span>
+          </span>
+        </Link>
+
+        <nav
+          aria-label="Основная навигация"
+          className="legal-header__nav"
+        >
           {navItems.map((it) => (
-            <a
+            <Link
               key={it.href}
               href={it.href}
-              className="text-sm text-black/80 transition hover:text-black"
+              className="legal-header__nav-link"
             >
               {it.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <a href={`tel:${siteConfig.contacts.phoneHref}`} className="hidden md:inline">
-            <Button variant="outline" size="sm">
-              Позвонить
-            </Button>
+        <div className="legal-header__actions">
+          <a
+            href={`tel:${siteConfig.contacts.phoneHref}`}
+            className="legal-header__phone"
+          >
+            {siteConfig.contacts.phoneDisplay}
           </a>
-          <Link href="#contacts" className="inline">
-            <Button size="sm">Получить консультацию</Button>
-          </Link>
+          <Button
+            asLink
+            href="/#contacts"
+            variant="compact"
+            size="sm"
+            icon={<ConsultationIcon />}
+            className="legal-header__button"
+          >
+            Консультация
+          </Button>
         </div>
+
+        <button
+          type="button"
+          className="legal-header__burger"
+          aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
+          aria-controls="mobile-menu"
+          aria-expanded={isOpen}
+          onClick={() => setIsOpen((value) => !value)}
+        >
+          <span className="legal-header__burger-label">{isOpen ? "Закрыть меню" : "Открыть меню"}</span>
+          <span className="legal-header__burger-lines" aria-hidden="true">
+            <span className={cn(isOpen && "is-open-top")} />
+            <span className={cn(isOpen && "is-open-middle")} />
+            <span className={cn(isOpen && "is-open-bottom")} />
+          </span>
+        </button>
       </div>
+
+      {isOpen ? (
+        <div id="mobile-menu" className="legal-header__mobile">
+          <div className="legal-header__mobile-inner">
+            <nav aria-label="Мобильная навигация" className="legal-header__mobile-nav">
+              {navItems.map((it) => (
+                <Link
+                  key={it.href}
+                  href={it.href}
+                  className="legal-header__mobile-link"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {it.label}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="legal-header__mobile-actions">
+              <Button
+                asLink
+                href={`tel:${siteConfig.contacts.phoneHref}`}
+                variant="secondary"
+                size="md"
+                icon={<PhoneIcon />}
+                className="legal-header__mobile-phone"
+                onClick={() => setIsOpen(false)}
+              >
+                {siteConfig.contacts.phoneDisplay}
+              </Button>
+              <Button
+                asLink
+                href="/#contacts"
+                variant="primary"
+                size="md"
+                icon={<ConsultationIcon />}
+                className="legal-header__mobile-button"
+                onClick={() => setIsOpen(false)}
+              >
+                Получить консультацию
+              </Button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </header>
   );
 }

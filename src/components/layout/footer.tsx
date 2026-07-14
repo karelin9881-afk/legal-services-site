@@ -1,45 +1,50 @@
 import Link from "next/link";
 import { siteConfig } from "@/content/siteConfig";
 
+const footerLegalLinks = [
+  ["Политика обработки персональных данных", "/privacy"],
+  ["Согласие на обработку персональных данных", "/personal-data-consent"],
+];
+
 export function Footer() {
   return (
-    <footer className="border-t border-black/5 bg-white">
-      <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-3">
-          <div className="space-y-3">
-            <div className="text-sm font-semibold">{siteConfig.brand.name}</div>
-            <div className="text-sm text-black/70">
+    <footer className="legal-footer">
+      <div className="legal-footer__inner">
+        <div className="legal-footer__grid">
+          <div className="legal-footer__brand">
+            <div className="legal-footer__title">{siteConfig.brand.name}</div>
+            <div className="legal-footer__text">
               Помогаем в жилищных спорах и вопросах ЖКХ: консультации, досудебное урегулирование и представительство в суде.
             </div>
-            <div className="text-sm text-black/70">Адрес: {siteConfig.contacts.address}</div>
+            <div className="legal-footer__text">Адрес: {siteConfig.contacts.address}</div>
           </div>
 
-          <div className="space-y-2">
-            <div className="text-sm font-semibold">Контакты</div>
+          <div className="legal-footer__column">
+            <div className="legal-footer__title">Контакты</div>
             <a
-              className="block text-sm text-black/80 hover:text-black"
+              className="legal-footer__link"
               href={`tel:${siteConfig.contacts.phoneHref}`}
             >
               {siteConfig.contacts.phoneDisplay}
             </a>
             <a
-              className="block text-sm text-black/80 hover:text-black"
+              className="legal-footer__link"
               href={`mailto:${siteConfig.contacts.email}`}
             >
               {siteConfig.contacts.email}
             </a>
           </div>
 
-          <div className="space-y-2">
-            <div className="text-sm font-semibold">Разделы</div>
-            <div className="text-sm">
+          <div className="legal-footer__column">
+            <div className="legal-footer__title">Разделы</div>
+            <div className="legal-footer__nav">
               {[
-                ["О юристе", "#about"],
-                ["Услуги", "#services"],
-                ["FAQ", "#faq"],
-                ["Контакты", "#contacts"],
+                ["О юристе", "/#about"],
+                ["Услуги", "/#services"],
+                ["FAQ", "/#faq"],
+                ["Контакты", "/#contacts"],
               ].map(([label, href]) => (
-                <Link key={href} href={href} className="mr-3 text-black/80 hover:text-black">
+                <Link key={href} href={href} className="legal-footer__link">
                   {label}
                 </Link>
               ))}
@@ -47,11 +52,17 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-black/5 pt-6 text-xs text-black/60">
-          Политика конфиденциальности и юридические реквизиты.
+        <div className="legal-footer__bottom">
+          <span>Документы и реквизиты.</span>
+          <div className="legal-footer__bottom-links">
+            {footerLegalLinks.map(([label, href]) => (
+              <Link key={href} className="legal-footer__legal-link" href={href}>
+                {label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
   );
 }
-

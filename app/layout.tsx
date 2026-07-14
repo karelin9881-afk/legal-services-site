@@ -1,8 +1,27 @@
 import type { Metadata } from "next";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
+import "@/styles/legal-landing.scss";
+import "@/components/ButtonIcon/ButtonIcon.scss";
+import "@/components/Button/Button.scss";
+import "@/components/ButtonShowcase/ButtonShowcase.scss";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { RevealController } from "@/components/sections/reveal-controller";
 import { siteConfig } from "@/content/siteConfig";
+
+const manrope = Manrope({
+  subsets: ["cyrillic", "latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["cyrillic", "latin"],
+  variable: "--font-cormorant",
+  display: "swap",
+  weight: ["500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
@@ -45,19 +64,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru">
-      <body className="bg-white text-black antialiased">
+    <html lang="ru" className={`${manrope.variable} ${cormorantGaramond.variable}`}>
+      <body className="legal-body">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:text-black"
+          className="skip-link"
         >
           Перейти к содержимому
         </a>
         <Header />
-        <main id="main" className="min-h-[60vh]">
+        <main id="main" className="legal-main">
           {children}
         </main>
         <Footer />
+        <RevealController />
       </body>
     </html>
   );

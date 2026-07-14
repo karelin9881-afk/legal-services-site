@@ -6,25 +6,27 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "typecheck": "tsc --noEmit",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint app src --max-warnings=0"
   },
   "dependencies": {
-    "framer-motion": "latest",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "typescript": "latest"
+    "framer-motion": "12.42.2",
+    "next": "16.2.10",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "@tailwindcss/postcss": "latest",
-    "autoprefixer": "latest",
-    "postcss": "latest",
-    "tailwindcss": "latest",
-    "typescript": "latest"
+    "@tailwindcss/postcss": "4.3.2",
+    "@types/node": "26.1.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "autoprefixer": "10.5.2",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.2.10",
+    "postcss": "8.5.16",
+    "sass": "1.101.0",
+    "tailwindcss": "4.3.2",
+    "typescript": "6.0.3"
   }
 }
-

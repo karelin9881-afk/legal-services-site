@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getServiceBySlug } from "@/content/services";
+import { getServiceBySlug, services } from "@/content/services";
 import { siteConfig } from "@/content/siteConfig";
-import { Button } from "@/components/ui/button";
+import { buttonClassName } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ContactForm } from "@/components/forms/contact-form";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
@@ -14,12 +14,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+export function generateStaticParams() {
+  return services.map((service) => ({ slug: service.slug }));
+}
+
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
   const service = getServiceBySlug(slug);
 
   if (!service) {
@@ -50,53 +54,14 @@ export async function generateMetadata({
 export default async function ServicePage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
   const service = getServiceBySlug(slug);
 
   if (!service) {
     notFound();
   }
-
-  const serviceFaq: Array<{ q: string; a: string }> =
-    slug === "zaliv-zhilyh-pomeshcheniy-v-mkd"
-      ? [
-          {
-            q: "Что делать сразу после залива?",
-            a: "Зафиксируйте повреждения (акт/фото/видео), обеспечьте доступ к осмотру и соберите документы по обращению в управляющую организацию. Дальше мы поможем собрать доказательную базу для установления виновника.",
-          },
-          {
-            q: "Как устанавливается виновник залива?",
-            a: "Обычно это зависит от источника протечки и причин. Собираются документы от УК/ТСЖ, проводятся осмотры, при необходимости — экспертиза. Мы подбираем доказательства под вашу ситуацию.",
-          },
-          {
-            q: "Можно ли взыскать моральный вред?",
-            a: "В отдельных случаях суд учитывает моральные последствия и обстоятельства. Мы оценим перспективы и сформируем позицию так, чтобы аргументы были в связке с доказательствами.",
-          },
-          {
-            q: "Сколько длится процесс?",
-            a: "Срок зависит от стадии и объема доказательств. Дадим реалистичные ориентиры после первичной оценки документов и подскажем, что ускоряет дело.",
-          },
-        ]
-      : [
-          {
-            q: "Можно ли оспорить задолженность за ЖКУ?",
-            a: "Да. Мы проверяем основания начислений, документы, период и корректность расчета. Если есть нарушения — формируем правовую позицию для оспаривания.",
-          },
-          {
-            q: "Что делать с судебным решением или приказом?",
-            a: "В зависимости от ситуации подбираем процессуальные шаги: возражения, обжалование, восстановление сроков и дальнейшая защита ваших интересов.",
-          },
-          {
-            q: "Сопровождаете ли исполнительное производство?",
-            a: "Да. Помогаем на стадии взыскания: анализируем материалы, контролируем действия приставов/банков, готовим заявления и жалобы при необходимости.",
-          },
-          {
-            q: "Какие документы нужны в первую очередь?",
-            a: "Обычно это квитанции/расчеты, документы по лицевому счету, судебные акты (если уже есть) и письма/переписка. Составим список после консультации.",
-          },
-        ];
 
   return (
     <div className="bg-white">
@@ -120,20 +85,19 @@ export default async function ServicePage({
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                <Link href="#contacts" className="inline-flex">
-                  <Button size="md">Получить консультацию</Button>
+                <Link href="#contacts" className={buttonClassName({ size: "md" })}>
+                  Получить консультацию
                 </Link>
-                <a href={`tel:${siteConfig.contacts.phoneHref}`} className="inline-flex">
-                  <Button variant="outline" size="md">
-                    Позвонить
-                  </Button>
+                <a
+                  href={`tel:${siteConfig.contacts.phoneHref}`}
+                  className={buttonClassName({ variant: "outline", size: "md" })}
+                >
+                  Позвонить
                 </a>
               </div>
 
               <div className="mt-6 text-xs text-black/55">
-                {slug === "zaliv-zhilyh-pomeshcheniy-v-mkd"
-                  ? "Подходит, если нужна правовая позиция по факту залива: доказательства, виновник, ущерб, штрафы/неустойка."
-                  : "Подходит, если вам начислили задолженность за ЖКУ и нужно проверить расчеты, оспорить основания и защититься в суде."}
+                {service.detailNote}
               </div>
             </div>
 
@@ -149,7 +113,7 @@ export default async function ServicePage({
                   ))}
                 </ul>
 
-                <div className="mt-6 rounded-xl bg-brand/5 p-4">
+                <div className="mt-6 rounded-lg bg-brand/5 p-4">
                   <div className="text-sm font-semibold text-black">Дальше — по ситуации</div>
                   <div className="mt-1 text-sm text-black/65">
                     Мы подскажем, какие документы запрашивать, что лучше подготовить до подачи и как ускорить рассмотрение.
@@ -170,7 +134,7 @@ export default async function ServicePage({
                 Опишите ситуацию. Мы вернемся с рекомендациями и списком документов.
               </p>
 
-              <div className="mt-6 space-y-3 rounded-2xl border border-black/10 bg-white p-6">
+              <div className="mt-6 space-y-3 rounded-lg border border-black/10 bg-white p-6">
                 <div className="text-sm text-black/70">Телефон</div>
                 <a
                   className="block text-base font-semibold text-black"
@@ -197,7 +161,12 @@ export default async function ServicePage({
                   Автоподстановка темы: <span className="font-semibold">{service.title}</span>
                 </div>
                 <div className="mt-5">
-                  <ContactForm initialMessage={`Тема: ${service.title}\n\nСитуация:\n`} />
+                  <ContactForm
+                    formSource="service-contact-form"
+                    serviceSlug={service.slug}
+                    serviceTitle={service.title}
+                    initialMessage={`Тема: ${service.title}\n\nСитуация:\n`}
+                  />
                 </div>
               </div>
             </Card>
@@ -206,7 +175,7 @@ export default async function ServicePage({
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="rounded-2xl border border-black/10 bg-white p-6">
+        <div className="rounded-lg border border-black/10 bg-white p-6">
           <div className="text-sm font-semibold text-black">FAQ по услуге</div>
           <div className="mt-2 text-sm text-black/70">
             Коротко отвечаем на самые частые вопросы про <span className="font-semibold">{service.title}</span>.
@@ -214,7 +183,7 @@ export default async function ServicePage({
 
           <div className="mt-6">
             <Accordion>
-              {serviceFaq.map((item) => (
+              {service.faq.map((item) => (
                 <AccordionItem key={item.q}>
                   <AccordionTrigger>
                     <span className="text-sm">{item.q}</span>

@@ -16,7 +16,7 @@ type ContactFormProps = {
 };
 
 const contactEndpoint =
-  process.env.NEXT_PUBLIC_CONTACT_ENDPOINT?.trim() || "http://localhost:8081/contact.php";
+  process.env.NEXT_PUBLIC_CONTACT_ENDPOINT?.trim() || "/api/contact.php";
 
 async function readJsonSafe(res: Response) {
   try {

@@ -6,15 +6,27 @@ use App\ContactMailer;
 use App\ContactRequestValidator;
 use App\JsonResponse;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+$backendRoot = dirname(__DIR__);
+
+if (is_dir($backendRoot . '/_backend')) {
+    $backendRoot .= '/_backend';
+}
+
+require $backendRoot . '/vendor/autoload.php';
 
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 header('Cache-Control: no-store');
 
-$configPath = dirname(__DIR__) . '/config/config.local.php';
-$configExamplePath = dirname(__DIR__) . '/config/config.example.php';
-$config = require file_exists($configPath) ? $configPath : $configExamplePath;
+$configPath = $backendRoot . '/config/config.local.php';
+
+if (!file_exists($configPath)) {
+    error_log('CONTACT_CONFIG_MISSING');
+    JsonResponse::send(['ok' => false, 'error' => 'Сервис временно недоступен'], 503);
+    exit;
+}
+
+$config = require $configPath;
 
 /**
  * @param array<string, mixed> $config

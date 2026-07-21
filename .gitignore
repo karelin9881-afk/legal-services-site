@@ -4,6 +4,7 @@ out/
 dist/
 build/
 /legal-services-site-hosting.zip
+dist-upload.zip
 
 .env
 .env.*
